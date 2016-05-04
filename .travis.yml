@@ -14,3 +14,4 @@ script:
   - bash -x .travis/oracle/download.sh
   - bash -x .travis/oracle/install.sh
   - python setup.py install
+  - python test_external_connect.py
