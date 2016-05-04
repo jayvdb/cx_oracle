@@ -1,0 +1,16 @@
+language: python
+sudo: required
+
+script:
+  - export ORACLE_COOKIE=sqldev
+  - export ORACLE_FILE=oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+  - export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+  - export ORACLE_SID=XE
+  - export PATH=$PATH:$ORACLE_HOME/bin
+  - export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+  - wget 'https://github.com/cbandy/travis-oracle/archive/v2.0.0.tar.gz'
+  - mkdir -p .travis/oracle
+  - tar xz --strip-components 1 -C .travis/oracle -f v2.0.0.tar.gz
+  - bash -x .travis/oracle/download.sh
+  - bash -x .travis/oracle/install.sh
+  - python setup.py install
