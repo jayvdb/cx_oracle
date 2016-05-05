@@ -1,16 +1,30 @@
 import cx_Oracle
 
 try:
-    connection = cx_Oracle.connect(dsn='XE', password=None, threaded=True, twophase=True, user=None)
-    print('connected with dsn=XE')
+    pool = cx_Oracle.SessionPool(user='',password='',dsn='XE',min=1,max=2,increment=1,externalauth=True)
+    connection = pool.acquire()
+    print('pool connected using externalauth=True')
 except Exception as e:
+    print('pool connection using externalauth=True failed')
     print(e)
 
 try:
-    connection = cx_Oracle.connect(dsn='XE', password=None, threaded=True, twophase=True, user='/')
-    print('connected with dsn=XE user = /')
+    connection = cx_Oracle.connect(dsn='XE', password=None, user=None)
+    print('connected with dsn=XE')
 except Exception as e:
+    print('connection using just dsn failed:')
     print(e)
 
+try:
+    connection = cx_Oracle.connect(dsn='XE', password=None, user='/')
+    print('connected with dsn=XE user = /')
+except Exception as e:
+    print('connection using just dsn and user / failed:')
+    print(e)
 
-
+try:
+    connection = cx_Oracle.connect(dsn='XE', password='', user='/')
+    print('connected with dsn=XE user = /  password =')
+except Exception as e:
+    print('connection using dsn and user / and empty password failed:')
+    print(e)
