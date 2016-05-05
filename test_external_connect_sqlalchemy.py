@@ -15,6 +15,9 @@ urls = [
     'oracle://:@',
     'oracle://:@/',
     'oracle:///@localhost/XE',
+    'oracle://%2F',
+    'oracle://%2F@XE',
+    'oracle://%2F@localhost/XE',
 ]
 
 for connect_url in urls:
