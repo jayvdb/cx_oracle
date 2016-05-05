@@ -65,7 +65,15 @@ except Exception as e:
     print('\nconnection using dsn and user / and empty password failed: %s' % e)
 
 cargs = tuple()
-kwargs = {'dsn': '', 'password': None, 'user': '/'}  #, 'twophase': True, 'threaded': True
+kwargs = {'user': '/'}
+
+try:
+    connection = cx_Oracle.connect(*cargs, **kwargs)
+    print('connected with %r' % kwargs)
+except Exception as e:
+    print('\nconnection failed: %s' % e)
+
+kwargs = {'dsn': None, 'password': None, 'user': '/'}
 
 try:
     connection = cx_Oracle.connect(*cargs, **kwargs)
