@@ -73,6 +73,22 @@ try:
 except Exception as e:
     print('\nconnection failed: %s' % e)
 
+kwargs = {'user': '/', 'dsn': None}
+
+try:
+    connection = cx_Oracle.connect(*cargs, **kwargs)
+    print('connected with %r' % kwargs)
+except Exception as e:
+    print('\nconnection failed: %s' % e)
+
+kwargs = {'dsn': None, 'user': '/'}
+
+try:
+    connection = cx_Oracle.connect(*cargs, **kwargs)
+    print('connected with %r' % kwargs)
+except Exception as e:
+    print('\nconnection failed: %s' % e)
+
 kwargs = {'dsn': None, 'password': None, 'user': '/'}
 
 try:
