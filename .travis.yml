@@ -17,7 +17,7 @@ script:
   - python test_external_connect.py
   - pip install sqlalchemy
   - python test_external_connect_sqlalchemy.py
-  - pip uninstall cx_oracle
+  - pip uninstall -y cx_oracle
   - pip install cx_oracle_on_ctypes
   - python test_external_connect.py
   - python test_external_connect_sqlalchemy.py
