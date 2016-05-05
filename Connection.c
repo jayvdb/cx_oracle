@@ -632,6 +632,8 @@ static int Connection_Connect(
             "Connection_Connect(): allocate server handle") < 0)
         return -1;
 
+    printf("Connection_Connect start");
+
     // attach to the server
     if (cxBuffer_FromObject(&buffer, self->dsn,
             self->environment->encoding) < 0)
@@ -645,6 +647,8 @@ static int Connection_Connect(
     if (Environment_CheckForError(self->environment, status,
             "Connection_Connect(): server attach") < 0)
         return -1;
+
+    printf("Connection_Connect attached");
 
     // allocate the service context handle
     status = OCIHandleAlloc(self->environment->handle,
@@ -684,11 +688,15 @@ static int Connection_Connect(
             "Connection_Connect(): allocate session handle") < 0)
         return -1;
 
+    printf("Connection_Connect session handle");
+
     // set user name in session handle
     if (cxBuffer_FromObject(&buffer, self->username,
             self->environment->encoding) < 0)
         return -1;
     if (buffer.size > 0) {
+        printf("Connection_Connect setting username");
+
         credentialType = OCI_CRED_RDBMS;
         status = OCIAttrSet(self->sessionHandle, OCI_HTYPE_SESSION,
                 (text*) buffer.ptr, buffer.size, OCI_ATTR_USERNAME,
@@ -706,6 +714,8 @@ static int Connection_Connect(
             self->environment->encoding) < 0)
         return -1;
     if (buffer.size > 0) {
+        printf("Connection_Connect setting password");
+
         credentialType = OCI_CRED_RDBMS;
         status = OCIAttrSet(self->sessionHandle, OCI_HTYPE_SESSION,
                 (text*) buffer.ptr, buffer.size, OCI_ATTR_PASSWORD,
