@@ -283,8 +283,12 @@ static int Connection_GetConnection(
         mode = OCI_SESSGET_STMTCACHE;
     }
 
+    printf(" Connection_GetConnection start ");
+
     // set up authorization handle, if needed
     if (!pool || cclassObj || proxyAuth) {
+
+        printf(" Connection_GetConnection auth setup ");
 
         // create authorization handle
         status = OCIHandleAlloc(environment->handle, (dvoid*) &authInfo,
@@ -299,6 +303,7 @@ static int Connection_GetConnection(
                 self->environment->encoding) < 0)
             return -1;
         if (buffer.size > 0) {
+            printf(" Connection_GetConnection auth username ");
             externalAuth = 0;
             status = OCIAttrSet(authInfo, OCI_HTYPE_AUTHINFO,
                     (text*) buffer.ptr, buffer.size, OCI_ATTR_USERNAME,
@@ -316,6 +321,7 @@ static int Connection_GetConnection(
                 self->environment->encoding) < 0)
             return -1;
         if (buffer.size > 0) {
+            printf(" Connection_GetConnection auth password ");
             externalAuth = 0;
             status = OCIAttrSet(authInfo, OCI_HTYPE_AUTHINFO,
                     (text*) buffer.ptr, buffer.size, OCI_ATTR_PASSWORD,
@@ -947,17 +953,23 @@ static int Connection_Init(
     if (!self->environment)
         return -1;
 
+    printf(" Connection_Init xincref ");
+
     // keep a copy of the credentials
     Py_XINCREF(usernameObj);
     self->username = usernameObj;
     Py_XINCREF(dsnObj);
     self->dsn = dsnObj;
 
+    printf(" Connection_Init xincref done ");
+
     // perform some parsing, if necessary
     if (Connection_SplitComponent(&self->username, &passwordObj, "/") < 0)
         return -1;
     if (Connection_SplitComponent(&passwordObj, &self->dsn, "@") < 0)
         return -1;
+
+    printf(" Connection_Init split done ");
 
     // handle the different ways of initializing the connection
     if (handle)
