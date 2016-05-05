@@ -64,7 +64,7 @@ try:
 except Exception as e:
     print('\nconnection using dsn and user / and empty password failed: %s' % e)
 
-cargs = (, )
+cargs = tuple()
 kwargs = {'dsn': None, 'password': None, 'user': '/', 'twophase': True, 'threaded': True}
 
 try:
