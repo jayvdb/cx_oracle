@@ -5,7 +5,29 @@ try:
     connection = pool.acquire()
     print('pool connected using externalauth=True')
 except Exception as e:
-    print('pool connection using externalauth=True failed')
+    print('pool connection using externalauth=True failed:')
+    print(e)
+
+try:
+    pool = cx_Oracle.SessionPool(user=None,password=None,dsn=None,min=1,max=2,increment=1,externalauth=True)
+    connection = pool.acquire()
+    print('pool connected using externalauth=True with None')
+except Exception as e:
+    print('pool connection using externalauth=True with None failed:')
+    print(e)
+
+try:
+    connection = cx_Oracle.connect('/', mode=cx_Oracle.SYSDBA)
+    print('connected with / as sysdba')
+except Exception as e:
+    print('connection using / as sysdba failed:')
+    print(e)
+
+try:
+    connection = cx_Oracle.connect(dsn='/', mode=cx_Oracle.SYSDBA)
+    print('connected with / as sysdba')
+except Exception as e:
+    print('connection using dsn=/ as sysdba failed:')
     print(e)
 
 try:
