@@ -10,6 +10,7 @@ urls = [
     'oracle://:@localhost/XE',
     'oracle://XE',
     'oracle://:@XE',
+    'oracle://:@',
     'oracle://:@/',
     'oracle:///@localhost/XE',
 ]
