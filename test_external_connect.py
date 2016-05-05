@@ -5,48 +5,54 @@ try:
     connection = pool.acquire()
     print('pool connected using externalauth=True')
 except Exception as e:
-    print('pool connection using externalauth=True failed:')
-    print(e)
+    print('\npool connection using externalauth=True failed: %s' % e)
 
 try:
     pool = cx_Oracle.SessionPool(user=None,password=None,dsn=None,min=1,max=2,increment=1,externalauth=True)
     connection = pool.acquire()
     print('pool connected using externalauth=True with None')
 except Exception as e:
-    print('pool connection using externalauth=True with None failed:')
-    print(e)
+    print('\npool connection using externalauth=True with None failed: %s' % e)
 
 try:
     connection = cx_Oracle.connect('/', mode=cx_Oracle.SYSDBA)
     print('connected with / as sysdba')
 except Exception as e:
-    print('connection using / as sysdba failed:')
-    print(e)
+    print('\nconnection using / as sysdba failed: %s' % e)
 
 try:
     connection = cx_Oracle.connect(dsn='/', mode=cx_Oracle.SYSDBA)
-    print('connected with / as sysdba')
+    print('connected with dsn=/ as sysdba')
 except Exception as e:
-    print('connection using dsn=/ as sysdba failed:')
-    print(e)
+    print('\nconnection using dsn=/ as sysdba failed: %s' % e)
+
+try:
+    connection = cx_Oracle.connect(user='/', mode=cx_Oracle.SYSDBA)
+    print('connected with user=/ as sysdba')
+except Exception as e:
+    print('\nconnection using user=/ as sysdba failed: %s' % e)
+
+try:
+    connection = cx_Oracle.connect(user='/')
+    print('connected with user=/ ')
+except Exception as e:
+    print('\nconnection using user=/ failed: %s' % e)
+
 
 try:
     connection = cx_Oracle.connect(dsn='XE', password=None, user=None)
     print('connected with dsn=XE')
 except Exception as e:
-    print('connection using just dsn failed:')
-    print(e)
+    print('connection using just dsn failed: %s' % e)
 
 try:
     connection = cx_Oracle.connect(dsn='XE', password=None, user='/')
     print('connected with dsn=XE user = /')
 except Exception as e:
-    print('connection using just dsn and user / failed:')
-    print(e)
+    print('\nconnection using just dsn and user / failed: %s' % e)
 
 try:
     connection = cx_Oracle.connect(dsn='XE', password='', user='/')
     print('connected with dsn=XE user = /  password =')
 except Exception as e:
-    print('connection using dsn and user / and empty password failed:')
-    print(e)
+    print('\nconnection using dsn and user / and empty password failed: %s' %s e)
