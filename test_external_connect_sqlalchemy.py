@@ -9,7 +9,7 @@ urls = [
 
 for url in urls:
     try:
-        engine = create_engine(sqlalchemy_connect_url)
+        engine = create_engine(url)
         connection = engine.connect()
         print('connected using %s' % url)
     except Exception as e:
