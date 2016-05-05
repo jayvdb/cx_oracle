@@ -896,6 +896,8 @@ static int Connection_Init(
             "purity", "newpassword", "encoding", "nencoding", "module",
             "action", "clientinfo", "edition", NULL };
 
+    print(" Connection_Init started ")
+
     // parse arguments
     pool = NULL;
     handle = NULL;
@@ -914,7 +916,12 @@ static int Connection_Init(
             &threadedObj, &twophaseObj, &eventsObj, &cclassObj, &purity,
             &newPasswordObj, &encoding, &nencoding, &moduleObj, &actionObj,
             &clientinfoObj, &editionObj))
+        print(" Connection_Init failed in PyArg_ParseTupleAndKeywords ")
+
         return -1;
+
+    print(" Connection_Init passed parsing ")
+
     if (threadedObj) {
         threaded = PyObject_IsTrue(threadedObj);
         if (threaded < 0)

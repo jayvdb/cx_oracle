@@ -17,8 +17,8 @@ urls = [
     'oracle:///@localhost/XE',
     'oracle://%2F',
     'oracle://%2F@',
-    'oracle://%2F:',
-    'oracle://%2F:/',
+    # 'oracle://%2F:',  # invalid literal for int() with base 10
+    # 'oracle://%2F:/',  # invalid literal for int() with base 10
     'oracle://%2F:@',
     'oracle://%2F@XE',
     'oracle://%2F@localhost/XE',
@@ -39,3 +39,7 @@ for connect_url in urls:
     except Exception as e:
         print('\nconnection as %s failed: %s' % (connect_url, e))
     print('---')
+
+
+engine = create_engine('oracle://%2F@')
+connection = engine.connect()
