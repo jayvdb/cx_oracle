@@ -638,6 +638,9 @@ static int Connection_Connect(
     if (cxBuffer_FromObject(&buffer, self->dsn,
             self->environment->encoding) < 0)
         return -1;
+
+    printf("Connection_Connect dsn done");
+
     Py_BEGIN_ALLOW_THREADS
     status = OCIServerAttach(self->serverHandle,
             self->environment->errorHandle, (text*) buffer.ptr, buffer.size,
