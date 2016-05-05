@@ -733,6 +733,9 @@ static int Connection_Connect(
     }
     cxBuffer_Clear(&buffer);
 
+    printf(" Connection_Connect user/pass done ");
+
+
 #if ORACLE_VERSION_HEX >= ORACLE_VERSION(11,1)
     status = OCIAttrSet(self->sessionHandle, OCI_HTYPE_SESSION,
             (text*) DRIVER_NAME, strlen(DRIVER_NAME), OCI_ATTR_DRIVER_NAME,
@@ -751,6 +754,8 @@ static int Connection_Connect(
             "Connection_Connect(): set session handle") < 0)
         return -1;
 
+    printf(" Connection_Connect service handle done ");
+
     if (moduleObj) {
         if (cxBuffer_FromObject(&buffer, moduleObj,
                 self->environment->encoding))
@@ -763,6 +768,8 @@ static int Connection_Connect(
                 "Connection_Connect(): set module") < 0)
             return -1;
     }
+
+    printf(" Connection_Connect there.. ");
 
     if (actionObj) {
         if (cxBuffer_FromObject(&buffer, actionObj,
@@ -790,6 +797,8 @@ static int Connection_Connect(
             return -1;
     }
 
+    printf(" Connection_Connect here.. ");
+
 #if ORACLE_VERSION_HEX >= ORACLE_VERSION(11, 2)
     if (editionObj) {
         if (cxBuffer_FromObject(&buffer, editionObj,
@@ -809,6 +818,8 @@ static int Connection_Connect(
     // establish the session
     if (newPasswordObj)
         return Connection_ChangePassword(self, passwordObj, newPasswordObj);
+
+    printf(" Connection_Connect session begin.. ");
 
     // begin the session
     Py_BEGIN_ALLOW_THREADS
