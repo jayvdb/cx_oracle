@@ -55,4 +55,4 @@ try:
     connection = cx_Oracle.connect(dsn='XE', password='', user='/')
     print('connected with dsn=XE user = /  password =')
 except Exception as e:
-    print('\nconnection using dsn and user / and empty password failed: %s' %s e)
+    print('\nconnection using dsn and user / and empty password failed: %s' % e)
