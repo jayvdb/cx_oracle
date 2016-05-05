@@ -15,6 +15,13 @@ except Exception as e:
     print('\npool connection using externalauth=True with None failed: %s' % e)
 
 try:
+    pool = cx_Oracle.SessionPool(user='/',password=None,dsn=None,min=1,max=2,increment=1,externalauth=True)
+    connection = pool.acquire()
+    print('pool connected using externalauth=True with None')
+except Exception as e:
+    print('\npool connection using externalauth=True with None failed: %s' % e)
+
+try:
     connection = cx_Oracle.connect('/', mode=cx_Oracle.SYSDBA)
     print('connected with / as sysdba')
 except Exception as e:
@@ -43,7 +50,7 @@ try:
     connection = cx_Oracle.connect(dsn='XE', password=None, user=None)
     print('connected with dsn=XE')
 except Exception as e:
-    print('connection using just dsn failed: %s' % e)
+    print('\nconnection using just dsn failed: %s' % e)
 
 try:
     connection = cx_Oracle.connect(dsn='XE', password=None, user='/')

@@ -15,3 +15,5 @@ script:
   - bash -x .travis/oracle/install.sh
   - python setup.py install
   - python test_external_connect.py
+  - pip install sqlalchemy
+  - python test_external_connect_sqlalchemy.py
