@@ -1,5 +1,16 @@
 import cx_Oracle
 
-connection = cx_Oracle.connect(dsn='/', password=None, threaded=True, twophase=True, user=None)
+try:
+    connection = cx_Oracle.connect(dsn='XE', password=None, threaded=True, twophase=True, user=None)
+    print('connected with dsn=XE')
+except Exception as e:
+    print(e)
 
-print('connected with /')
+try:
+    connection = cx_Oracle.connect(dsn='XE', password=None, threaded=True, twophase=True, user='/')
+    print('connected with dsn=XE user = /')
+except Exception as e:
+    print(e)
+
+
+
