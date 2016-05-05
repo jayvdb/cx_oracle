@@ -1,10 +1,12 @@
 from sqlalchemy.engine import create_engine, url
 
 urls = [
+    'oracle://',
     'oracle:///',
     'oracle:///@XE',
     'oracle:///:@XE',
     'oracle:///:@localhost/XE',
+    'oracle://localhost/XE',
     'oracle://:@localhost/XE',
     'oracle://XE',
     'oracle://:@XE',
