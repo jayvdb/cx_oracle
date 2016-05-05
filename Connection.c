@@ -896,8 +896,6 @@ static int Connection_Init(
             "purity", "newpassword", "encoding", "nencoding", "module",
             "action", "clientinfo", "edition", NULL };
 
-    print(" Connection_Init started ")
-
     // parse arguments
     pool = NULL;
     handle = NULL;
@@ -910,17 +908,20 @@ static int Connection_Init(
 #if ORACLE_VERSION_HEX >= ORACLE_VERSION(11, 1)
     purity = OCI_ATTR_PURITY_DEFAULT;
 #endif
+
+    printf(" Connection_Init started ");
+
     if (!PyArg_ParseTupleAndKeywords(args, keywordArgs,
             "|OOOiiO!OOOOiOssOOOO", keywordList, &usernameObj, &passwordObj,
             &dsnObj, &connectMode, &handle, &g_SessionPoolType, &pool,
             &threadedObj, &twophaseObj, &eventsObj, &cclassObj, &purity,
             &newPasswordObj, &encoding, &nencoding, &moduleObj, &actionObj,
-            &clientinfoObj, &editionObj))
-        print(" Connection_Init failed in PyArg_ParseTupleAndKeywords ")
+            &clientinfoObj, &editionObj)) {
+        printf(" Connection_Init failed in PyArg_ParseTupleAndKeywords ");
 
         return -1;
-
-    print(" Connection_Init passed parsing ")
+    }
+    printf(" Connection_Init passed parsing ");
 
     if (threadedObj) {
         threaded = PyObject_IsTrue(threadedObj);
