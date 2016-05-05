@@ -367,6 +367,8 @@ static int Connection_GetConnection(
     if (externalAuth)
         mode |= OCI_SESSGET_CREDEXT;
 
+    printf(" dbNameObj = %p ", dbNameObj);
+
     // acquire the new session
     if (cxBuffer_FromObject(&buffer, dbNameObj,
             self->environment->encoding) < 0)
@@ -632,7 +634,7 @@ static int Connection_Connect(
             "Connection_Connect(): allocate server handle") < 0)
         return -1;
 
-    printf(" Connection_Connect start ");
+    printf(" Connection_Connect start %p ", self->dsn);
 
     // attach to the server
     if (cxBuffer_FromObject(&buffer, self->dsn,

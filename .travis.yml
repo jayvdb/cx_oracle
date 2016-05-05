@@ -15,7 +15,7 @@ script:
   - bash -x .travis/oracle/install.sh
   - python setup.py install
   - python test_external_connect.py
-  - pip install sqlalchemy
+  - pip install git+https://github.com/jayvdb/sqlalchemy@oracle-passwordless
   - python test_external_connect_sqlalchemy.py
   - pip uninstall -y cx_oracle
   - pip install cx_oracle_on_ctypes
